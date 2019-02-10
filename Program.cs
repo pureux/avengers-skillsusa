@@ -13,9 +13,9 @@ namespace AvengersSkillsUSA {
             output.ReportStartup();
 
             List<Avenger> avengers = bootstrap.BootstrapAvengers();
-            List<Team> teams = bootstrap.BootstrapTeams(avengers);
+            AddCustomAvengers(ref avengers, input);
 
-            // TODO: allow the end user to add Avengers
+            List<Team> teams = bootstrap.BootstrapTeams(avengers);
 
             Input.WarMode warMode = input.GetWarMode();
 
@@ -26,6 +26,21 @@ namespace AvengersSkillsUSA {
                 Team thanosTeam = bootstrap.BootstrapThanos();
                 Team avengersTeam = bootstrap.UniteTheAvengers(avengers);
                 FightInfinityWar(avengersTeam, thanosTeam, output, tieLabel);
+            }
+        }
+
+        static void AddCustomAvengers(ref List<Avenger> avengers, Input input) {
+            bool addAvenger = input.AskAddAvenger();
+            while (addAvenger) {
+                List<string> existingAvengerNames = avengers.Select(a => a.Name).OrderBy(n => n).ToList();
+                string name = input.AskAvengerName(existingAvengerNames);
+                int powerLevel = input.AskAvengerPowerLevel();
+                string team = input.AskAvengerTeam();
+
+                var avenger = new Avenger(name, powerLevel, team);
+                avengers.Add(avenger);
+
+                addAvenger = input.AskAddAvenger();
             }
         }
 
@@ -83,7 +98,7 @@ namespace AvengersSkillsUSA {
         static int GetMaxPossibleCombatantsFromTeams(List<Team> teams) {
             int max = 0;
             foreach (var team in teams) {
-                if(team.NumberOfTeammates < max || max == 0) {
+                if(team.NumberOfTeammates >= max || max == 0) {
                     max = team.NumberOfTeammates;
                 }
             }
