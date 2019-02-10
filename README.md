@@ -2,6 +2,10 @@
 
 A programming exercise based on the plot of the Marvel movie Captain America: Civil War.
 
+The requirements are below.  Test your skills to see what you can build.
+
+The example solution is built with .NET Core as a console application (written on Mac OS using Visual Studio Code).  Read the *ExampleOutput.md* file to see what it produces.  It is object-oriented, uses dependency injection (for future unit testing), is extensible, validates input, covers all the requirements, and even includes the advanced features.
+
 ## Requirements
 
 The Sokovia Accords have split the Marvel Avengers into two factions: *Team Stark* and *Team Cap*.
