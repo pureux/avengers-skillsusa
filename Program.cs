@@ -61,9 +61,20 @@ namespace AvengersSkillsUSA {
                 battleWinners[battle.Winner]++;
             }
 
-            string warWinner = DetermineWarWinner(battleWinners, tieLabel);
+            var nonTieBattleWinners = RemoveTiesFromBattleWinners(battleWinners, tieLabel);
+            string warWinner = DetermineWarWinner(nonTieBattleWinners, tieLabel);
 
             output.ReportCivilWarResults(battleWinners, numberOfBattles, warWinner);
+        }
+
+        static Dictionary<string, int> RemoveTiesFromBattleWinners(Dictionary<string, int> battleWinners, string tieLabel) {
+            var nonTieBattleWinners = new Dictionary<string, int>();
+            foreach (var battleWinner in battleWinners) {
+                if (battleWinner.Key != tieLabel) {
+                    nonTieBattleWinners.Add(battleWinner.Key, battleWinner.Value);
+                }
+            }
+            return nonTieBattleWinners;
         }
 
         static void FightInfinityWar(Team avengersTeam, Team thanosTeam, Output output, string tieLabel) {
@@ -84,8 +95,13 @@ namespace AvengersSkillsUSA {
         }
 
         static string DetermineWarWinner(Dictionary<string, int> battleWinners, string tieLabel) {
+            var scores = new List<int>(battleWinners.Values);
+            if (scores.Distinct().Count() <= 1) {
+                return tieLabel;
+            }
+
             var winner = new KeyValuePair<string, int>(String.Empty, 0);
-            foreach(KeyValuePair<string, int> result in battleWinners.Where(w => w.Key != tieLabel))
+            foreach(KeyValuePair<string, int> result in battleWinners)
             {
                 if (result.Value > winner.Value) {
                     winner = result;

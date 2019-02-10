@@ -40,7 +40,7 @@ namespace AvengersSkillsUSA {
         private string DetermineWinner(Dictionary<string, int> results, string tieLabel) {
             var scores = new List<int>(results.Values);
             if (scores.Distinct().Count() <= 1) {
-                return "Tie";
+                return tieLabel;
             }
 
             var winner = new KeyValuePair<string, int>(String.Empty, 0);
