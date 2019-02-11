@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace AvengersSkillsUSA {
+
+    /// <summary>
+    /// The main class responsible for running the application
+    /// </summary>
     class Program {
+
+        /// <summary>
+        /// The main execution of the console application
+        /// </summary>
+        /// <param name="args">Any initial arguments passed into the application on startup</param>
         static void Main(string[] args) {
             const string tieLabel = "Tie";
             var bootstrap = new Bootstrap();
@@ -29,6 +38,11 @@ namespace AvengersSkillsUSA {
             }
         }
 
+        /// <summary>
+        /// Allow the user to add their own Avenger, and possibly create a new team
+        /// </summary>
+        /// <param name="avengers"></param>
+        /// <param name="input"></param>
         static void AddCustomAvengers(ref List<Avenger> avengers, Input input) {
             bool addAvenger = input.AskAddAvenger();
             while (addAvenger) {
@@ -44,6 +58,13 @@ namespace AvengersSkillsUSA {
             }
         }
 
+        /// <summary>
+        /// Process through fighting Civil War mode
+        /// </summary>
+        /// <param name="teams"></param>
+        /// <param name="input">The input utility for gathering input from the user</param>
+        /// <param name="output">The output utility for reporting to the user</param>
+        /// <param name="tieLabel">The label used to indicate a tie</param>
         static void FightCivilWar(List<Team> teams, Input input, Output output, string tieLabel) {
             int maxPossibleCombatantsPerTeam = GetMaxPossibleCombatantsFromTeams(teams);
             int numberOfCombatantsPerTeam = input.GetNumberOfSelectedCombatants(maxPossibleCombatantsPerTeam);
@@ -67,6 +88,13 @@ namespace AvengersSkillsUSA {
             output.ReportCivilWarResults(battleWinners, numberOfBattles, warWinner);
         }
 
+        /// <summary>
+        /// Remove the battles that were tied fro the winners list; even if there were more ties than there were wins by a certain team,
+        /// that doesn't mean the war result was a tie
+        /// </summary>
+        /// <param name="battleWinners">A dictionary of winners and the number of battles they won</param>
+        /// <param name="tieLabel">The label used to indicate a tie</param>
+        /// <returns></returns>
         static Dictionary<string, int> RemoveTiesFromBattleWinners(Dictionary<string, int> battleWinners, string tieLabel) {
             var nonTieBattleWinners = new Dictionary<string, int>();
             foreach (var battleWinner in battleWinners) {
@@ -77,6 +105,13 @@ namespace AvengersSkillsUSA {
             return nonTieBattleWinners;
         }
 
+        /// <summary>
+        /// Process through fighting the Infinity War mode
+        /// </summary>
+        /// <param name="avengersTeam">The team of all Avengers</param>
+        /// <param name="thanosTeam">The team of only Thanos</param>
+        /// <param name="output">The output utility for reporting to the user</param>
+        /// <param name="tieLabel">The label used to indicate a tie</param>
         static void FightInfinityWar(Team avengersTeam, Team thanosTeam, Output output, string tieLabel) {
             const int numberOfAvengersFightingThanos = 5;
 
@@ -94,6 +129,12 @@ namespace AvengersSkillsUSA {
             }
         }
 
+        /// <summary>
+        /// Determine which team won the most battles and is ultimately the winner of the war
+        /// </summary>
+        /// <param name="battleWinners">A dictionary of winners and the number of battles they won</param>
+        /// <param name="tieLabel">The label used to indicate a tie</param>
+        /// <returns></returns>
         static string DetermineWarWinner(Dictionary<string, int> battleWinners, string tieLabel) {
             var scores = new List<int>(battleWinners.Values);
             if (scores.Distinct().Count() <= 1) {
@@ -111,6 +152,11 @@ namespace AvengersSkillsUSA {
             return String.IsNullOrEmpty(winner.Key) ? tieLabel : winner.Key;
         }
 
+        /// <summary>
+        /// Determine the maximum number of combatants that can be entered, looking at the number of Avengers in each team
+        /// </summary>
+        /// <param name="teams">The list of all teams, which includes their Avengers</param>
+        /// <returns></returns>
         static int GetMaxPossibleCombatantsFromTeams(List<Team> teams) {
             int max = 0;
             foreach (var team in teams) {
