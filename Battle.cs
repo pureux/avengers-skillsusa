@@ -21,7 +21,7 @@ namespace AvengersSkillsUSA {
             this.Combatants = new List<Avenger>();
             this.Teams = teams;
 
-            foreach (var team in teams) {
+            foreach (Team team in teams) {
                 this.Combatants.AddRange(team.SelectCombatants(numberOfCombatantsPerTeam));
 
                 int score = this.CalculateTotalPowerLevel(this.Combatants.Where(c => c.Team == team.Name).ToList());
@@ -78,12 +78,12 @@ namespace AvengersSkillsUSA {
         /// <param name="tieLabel">The label used to indicate a tie</param>
         /// <returns></returns>
         private string DetermineWinner(Dictionary<string, int> results, string tieLabel) {
-            var scores = new List<int>(results.Values);
+            List<int> scores = new List<int>(results.Values);
             if (scores.Distinct().Count() <= 1) {
                 return tieLabel;
             }
 
-            var winner = new KeyValuePair<string, int>(String.Empty, 0);
+            KeyValuePair<string, int> winner = new KeyValuePair<string, int>(string.Empty, 0);
             foreach(KeyValuePair<string, int> result in this.Results)
             {
                 if (result.Value > winner.Value) {
@@ -108,7 +108,7 @@ namespace AvengersSkillsUSA {
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            return String.Format("{0}|{1}", this.Combatants.Count, this.Winner);
+            return string.Format("{0}|{1}", this.Combatants.Count, this.Winner);
         }
     }
 }

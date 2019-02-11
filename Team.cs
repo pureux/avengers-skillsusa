@@ -43,7 +43,7 @@ namespace AvengersSkillsUSA {
         /// <summary>
         /// Generate a new random number based on the number of Avengers on the team
         /// </summary>
-        /// <param name="random"></param>
+        /// <param name="random">A Random object containing a randomized sequence of integers to traverse</param>
         /// <returns></returns>
         private int GenerateRandomIndex(Random random) {
             const int inclusiveMin = 0; // 0-based index
@@ -54,15 +54,15 @@ namespace AvengersSkillsUSA {
         /// <summary>
         /// Randomly select combatants from the list of Avengers on the team
         /// </summary>
-        /// <param name="total"></param>
+        /// <param name="total">The total number of combatants to select on the team</param>
         /// <returns></returns>
         public List<Avenger> SelectCombatants(int total) {
-            var combatants = new List<Avenger>();
-            var random = new Random();
+            List<Avenger> combatants = new List<Avenger>();
+            Random random = new Random();  // Instantiate one time, outside of the loop; otherwise you'll get the same sequence each time due to the system clock
 
             while (combatants.Count < total && combatants.Count < this.NumberOfTeammates) {
-                var i = GenerateRandomIndex(random);
-                var avenger = this.Teammates[i];
+                int i = GenerateRandomIndex(random);
+                Avenger avenger = this.Teammates[i];
 
                 if (!combatants.Exists(c => c.Name == avenger.Name)) {
                     combatants.Add(avenger);
@@ -77,21 +77,21 @@ namespace AvengersSkillsUSA {
         /// <returns></returns>
         public Dictionary<string, bool> BalanceTheTeam() {
             int half = (int)Math.Ceiling((double)this.NumberOfTeammates / (double)2);
-            var indices = new List<int>();
-            var random = new Random();
+            List<int> indices = new List<int>();
+            Random random = new Random();  // Instantiate one time, outside of the loop; otherwise you'll get the same sequence each time due to the system clock
 
             while (indices.Count < half) {
-                var i = GenerateRandomIndex(random);
+                int i = GenerateRandomIndex(random);
                 if (!indices.Contains(i)) {
                     indices.Add(i);
                 }
             }
 
-            var results = new Dictionary<string, bool>();
+            Dictionary<string, bool> results = new Dictionary<string, bool>();
             for (int i = 0; i < this.NumberOfTeammates; i++)
             {
-                var avenger = this.Teammates[i];
-                var includedInHalf = indices.Contains(i);
+                Avenger avenger = this.Teammates[i];
+                bool includedInHalf = indices.Contains(i);
                 results.Add(avenger.Name, includedInHalf);
             }
 

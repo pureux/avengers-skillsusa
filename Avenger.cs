@@ -42,7 +42,7 @@ namespace AvengersSkillsUSA {
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            return String.Format("{0}|{1}|{2}", this.Name, this.PowerLevel, this.Team);
+            return string.Format("{0}|{1}|{2}", this.Name, this.PowerLevel, this.Team);
         }
     }
 }

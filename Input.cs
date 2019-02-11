@@ -54,7 +54,7 @@ namespace AvengersSkillsUSA {
             const string yes = "yes";
             const string no = "no";
 
-            var choices = new List<String>();
+            List<string> choices = new List<string>();
             choices.Add(yes);
             choices.Add(no);
 
@@ -66,7 +66,7 @@ namespace AvengersSkillsUSA {
         }
 
         // Ask the user for the new Avenger's name
-        public string AskAvengerName(List<String> existingAvengers) {
+        public string AskAvengerName(List<string> existingAvengers) {
             return GetTextInput("What is their name?", existingAvengers);
         }
 
@@ -116,8 +116,8 @@ namespace AvengersSkillsUSA {
 
             while (!IsFoundInChoices(input, choices)) {
                 Console.Write("You must enter a valid choice. /");
-                foreach (var choice in choices) {
-                    Console.Write(String.Format(" {0} /", choice));
+                foreach (string choice in choices) {
+                    Console.Write(string.Format(" {0} /", choice));
                 }
                 Console.Write("\n");
                 input = Console.ReadLine();
@@ -136,12 +136,12 @@ namespace AvengersSkillsUSA {
             Console.WriteLine(text);
             string input = Console.ReadLine();
 
-            while (String.IsNullOrEmpty(input) || (invalidValues != null && IsFoundInChoices(input, invalidValues))) {
+            while (string.IsNullOrEmpty(input) || (invalidValues != null && IsFoundInChoices(input, invalidValues))) {
                 Console.Write("You must enter a value.");
                 if (invalidValues != null) {
                     Console.Write(" It cannot be any of the following: /");
                     foreach (string value in invalidValues) {
-                        Console.Write(String.Format(" {0} /", value));
+                        Console.Write(string.Format(" {0} /", value));
                     }
                 }
                 Console.Write("\n");

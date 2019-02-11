@@ -51,7 +51,7 @@ namespace AvengersSkillsUSA {
             Console.WriteLine(new string('=', this.OutputWidth));
 
             foreach(KeyValuePair<string, bool> result in avengersSafety) {
-                Console.WriteLine(String.Format(
+                Console.WriteLine(string.Format(
                     "{0}{1}",
                     result.Key.PadRight(this.OutputWidth - resultOutputWidth),
                     result.Value ? "Dust" : "Safe"
@@ -73,7 +73,7 @@ namespace AvengersSkillsUSA {
 
             int battlesWonOutputWidth = numberOfBattles.ToString().Length;
             foreach(KeyValuePair<string, int> winner in battleWinners) {
-                Console.WriteLine(String.Format(
+                Console.WriteLine(string.Format(
                     "{0}{1}",
                     winner.Key.PadRight(this.OutputWidth - battlesWonOutputWidth),
                     winner.Value.ToString().PadLeft(battlesWonOutputWidth)));
@@ -82,7 +82,7 @@ namespace AvengersSkillsUSA {
             const string winnerLabel = "CIVIL WAR WINNER";
 
             Console.WriteLine(new string('-', this.OutputWidth));
-            Console.WriteLine(String.Format(
+            Console.WriteLine(string.Format(
                 "{0}{1}\n",
                 winnerLabel,
                 warWinner.PadLeft(this.OutputWidth - winnerLabel.Length)));
@@ -94,7 +94,7 @@ namespace AvengersSkillsUSA {
         /// <param name="battle">The battle object with its details and results</param>
         /// <param name="battleNumber">The sequence number of the battle</param>
         public void ReportBattleResults(Battle battle, int battleNumber = 1) {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             const int powerLevelOutputWidth = 5;
             const int combatantIndentWidth = 2;
             const string winnerLabel = "WINNER";

@@ -16,7 +16,7 @@ namespace AvengersSkillsUSA {
         public List<Avenger> BootstrapAvengers() {
             const string teamStark = "Team Stark";
             const string teamCap = "Team Cap";
-            var avengers = new List<Avenger>();
+            List<Avenger> avengers = new List<Avenger>();
 
             avengers.Add(new Avenger("Black Widow", 10, teamStark));
             avengers.Add(new Avenger("War Machine", 20, teamStark));
@@ -41,10 +41,10 @@ namespace AvengersSkillsUSA {
         /// <param name="avengers">The list of Avengers to build the teams</param>
         /// <returns></returns>
         public List<Team> BootstrapTeams(List<Avenger> avengers) {
-            var teams = new List<Team>();
+            List<Team> teams = new List<Team>();
 
-            foreach (var avenger in avengers) {
-                var team = teams.FirstOrDefault(t => t.Name == avenger.Team);
+            foreach (Avenger avenger in avengers) {
+                Team team = teams.FirstOrDefault(t => t.Name == avenger.Team);
                 if (team == null) {
                     team = new Team(avenger.Team);
                     teams.Add(team);
@@ -62,9 +62,9 @@ namespace AvengersSkillsUSA {
         public Team BootstrapThanos() {
             const string thanosTeamName = "Thanos";
 
-            var thanos = new Avenger(thanosTeamName, 200, thanosTeamName);
+            Avenger thanos = new Avenger(thanosTeamName, 200, thanosTeamName);
 
-            var thanosTeam = new Team(thanosTeamName);
+            Team thanosTeam = new Team(thanosTeamName);
             thanosTeam.Teammates.Add(thanos);
 
             return thanosTeam;
@@ -77,7 +77,7 @@ namespace AvengersSkillsUSA {
         /// <returns></returns>
         public Team UniteTheAvengers(List<Avenger> avengers) {
             const string avengersTeamName = "Avengers";
-            var avengersTeam = new Team(avengersTeamName);
+            Team avengersTeam = new Team(avengersTeamName);
 
             foreach(Avenger avenger in avengers) {
                 avenger.Team = avengersTeamName;
