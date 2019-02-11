@@ -22,15 +22,16 @@ Track a series of battles with re-randomized combatants for each battle.
 
 For each battle, display the results, including:
 
-* Each team member with their name, power level, and team name
-* The total power level for each team
+* Each team name
+* Each combatant with their name and power level, and indicate which team they are on
+* The total power level of the selected combatants for each team
 * Which team won the battle (or if it was a tie)
 
 Allow the user to enter the number of battles to have the Avengers fight.  Default to 5 battles.
 
-Avengers must be unique within each battle, but can be reused in other battles (you can’t have a team of 2+ Black Panthers in a battle, but Black Panther could be randomly included in each battle).
+Avengers must be unique within each battle, but can be reused in other battles (example: you can’t have a team of 2+ Black Panthers in a battle, but Black Panther could be randomly included in each battle).
 
-Output the results of each of the battles, including the list of combatants, their power level, and their team, indicating each team’s score and which team was the winner (Team Stark or Team Cap).
+Output the results of each of the battles, including the list of combatants, their power level, and their team, indicating each team’s score and which team was the winner (*Team Stark*, *Team Cap*, or a tie).
 
 Determine which team won the most battles, or if it was a tie, and display the results as the winner of the Civil War.
 
@@ -54,5 +55,5 @@ Determine which team won the most battles, or if it was a tie, and display the r
 
 ## Advanced Features
 
-1. Allow the user to add their own Avengers (such as Thor or Hulk), with their own custom power level, to either team and include them in the randomized selection for each battle.
+1. Allow the user to add their own Avengers (such as Thor or Hulk), with their own custom power level, to either team and include them in the randomized selection for each battle.  Do not allow them to add Avengers that are already in the data.
 2. Allow the end user to choose Infinity War mode, where they can battle Thanos (200 power level) against a total of 5 randomly selected combatants from both teams of Avengers combined, and output the result of the one-battle war.  The battle/war can end in a tie.  If the Avengers lose, randomly select 50% of all the Avengers from both teams (not just the combatants) to be turned to dust, and output the results of who survived and who perished.
