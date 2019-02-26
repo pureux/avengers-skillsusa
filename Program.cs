@@ -137,7 +137,7 @@ namespace AvengersSkillsUSA {
         /// <returns></returns>
         static string DetermineWarWinner(Dictionary<string, int> battleWinners, string tieLabel) {
             List<int> scores = new List<int>(battleWinners.Values);
-            if (scores.Distinct().Count() <= 1) {
+            if (scores.Distinct().Count() <= 1) { // TODO: fix bug where one team wins all battles but the war is reported as a tie
                 return tieLabel;
             }
 
